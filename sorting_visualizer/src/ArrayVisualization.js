@@ -17,25 +17,14 @@ const Item = styled(Paper)(({ theme, height, width, color }) => ({
 const darkTheme = createTheme({ palette: { mode: 'dark' } });
 const lightTheme = createTheme({ palette: { mode: 'light' } });
 
-export default function Bar(props) {
+export default function ArrayVisualization(props) {
   return (
-
       <Grid container spacing={0} sx={{ justifyContent: 'center'}} >
       {[darkTheme].map((theme, index) => (
           <ThemeProvider theme={theme}>
               {props.array.map((num) => (
-                
-			
-		    num % 4 == 0 ? (
-		    <Item height={35 * num + "px" } width={80/props.array.length + "%"} color={"DodgerBlue"} 
-		      key={num} elevation={num} />
-			) : ( 
-			<Item height={35 * num + "px" } width={80/props.array.length + "%"} color={"black"}
-                      key={num} elevation={num} />
-			)
-
-		    
-		  
+		    <Item key={num} height={35 * num + "px" } width={80/props.array.length + "%"} color={"DodgerBlue"} 
+		      key={num} elevation={10} />
               ))}
           </ThemeProvider>
       ))}
