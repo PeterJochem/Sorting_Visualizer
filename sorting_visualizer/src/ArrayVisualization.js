@@ -21,10 +21,10 @@ export default function ArrayVisualization(props) {
   return (
       <Grid container spacing={0} sx={{ justifyContent: 'center'}} >
       {[darkTheme].map((theme, index) => (
-          <ThemeProvider theme={theme}>
-              {props.array.map((num) => (
-		    <Item key={num} height={35 * num + "px" } width={80/props.array.length + "%"} color={"DodgerBlue"} 
-		      key={num} elevation={10} />
+          <ThemeProvider key={index} theme={theme}>
+              {props.array.map((num, idx) => (
+		    <Item key={idx} height={35 * num + "px" } width={80/props.array.length + "%"} color={"DodgerBlue"} 
+		      elevation={10} />
               ))}
           </ThemeProvider>
       ))}

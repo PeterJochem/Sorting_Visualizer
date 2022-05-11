@@ -2,12 +2,12 @@ import logo from './logo.svg';
 import ArrayVisualization from './ArrayVisualization.js';
 import React, { useState, useEffect } from 'react';
 import NormalDistribution from 'normal-distribution';
-
+import {bubbleSort, mergeSort} from './SortingAlgorithms.js';
 
 class ArraySorter extends React.Component {
   constructor() {
     super();
-    this.state = {array: this.create_normally_distributed_array(500, 50, 1)};
+    this.state = {array: this.shuffleArray(this.create_normally_distributed_array(500, 50, 1))};
     this.timeout = 250; // 2.5 seconds
     this.updateTimeout = setTimeout(() => this.update(), this.timeout);
     this.sortingHistory = [];
@@ -16,15 +16,12 @@ class ArraySorter extends React.Component {
     this.recordSortingSnapshot = this.recordSortingSnapshot.bind(this);
     this.shuffleArray = this.shuffleArray.bind(this);
     this.getDisplayArray = this.getDisplayArray.bind(this);
-    this.bubbleSort = this.bubbleSort.bind(this);
-
-    this.bubbleSort(this.state.array, 0, this.state.array.length, this.recordSortingSnapshot);
+    
+    //bubbleSort(this.state.array, 0, this.state.array.length, this.recordSortingSnapshot);
+    mergeSort(this.state.array, this.state.array, 0, this.recordSortingSnapshot);
   }
 
   update = () => {
-        //let newArray = this.create_normally_distributed_array(500, 50, 1);
-        //newArray = this.shuffleArray(newArray);
-        
 	// Need to change the state so it calls render again
 	this.setState({array: []});
 	this.displayedIndex += 1;
@@ -50,29 +47,6 @@ class ArraySorter extends React.Component {
   shuffleArray(array) {
   	return array.sort(() => Math.random() - 0.5);
   };
-  
-  // Put this in a seperate file 
-  // import the sortingFunction and pass a function to
-  // update/record the intermediate states of the sorting
-  bubbleSort(array, leftIndex, rightIndex, recordProgressFunc) {
-	
-	let span = rightIndex - leftIndex;
-	if (span === 0) {
-		return;
-	}
-
-	let subArray = array.slice(leftIndex, rightIndex + 1);
-	let minValue = Math.min(...subArray);
-        let indexOfMinValue = subArray.indexOf(minValue);
-	let tmp = subArray[0];
-	array[leftIndex + indexOfMinValue] = tmp;
-	array[leftIndex] = minValue;
-
-	recordProgressFunc(array);
-
-	// then call bubbleSort on the array[1:]
-	this.bubbleSort(array, leftIndex + 1, rightIndex, recordProgressFunc);	
-  }
   
   getDisplayArray() {
 	if (this.sortingHistory.length === 0) {
