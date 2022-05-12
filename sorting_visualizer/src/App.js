@@ -4,6 +4,7 @@ import ArrayVisualization from './ArrayVisualization.js';
 import React, { useState, useEffect } from 'react';
 import NormalDistribution from 'normal-distribution';
 import ArraySorter from './ArraySorter.js';
+import Banner from './Banner.js';
 
 class App extends React.Component {
   constructor() {
@@ -12,6 +13,7 @@ class App extends React.Component {
 
   render() {
     return  <div className="App">
+		<Banner> </Banner>
 		<ArraySorter> </ArraySorter>	  
 	</div>
 ;

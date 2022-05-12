@@ -42,7 +42,7 @@ class ArraySorter extends React.Component {
 
   recordSortingSnapshot(array) {
 	this.sortingHistory.push([...array]);
-  }
+  } 
 
   shuffleArray(array) {
   	return array.sort(() => Math.random() - 0.5);
