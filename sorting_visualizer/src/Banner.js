@@ -80,16 +80,17 @@ const Banner = (props) => {
             noWrap
             component="a"
             href="/"
-            sx={{
+	   sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
+              display: { xs: 'flex', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+	      paddingLeft: '5%'
             }}
-          >
+	    >
             Sorting Algorithms
           </Typography>
 
