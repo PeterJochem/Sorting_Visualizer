@@ -4,6 +4,7 @@ import ArrayVisualization from './ArrayVisualization.js';
 import React, { useState, useEffect } from 'react';
 import NormalDistribution from 'normal-distribution';
 import ArraySorter from './ArraySorter.js';
+import ArraySorterFunc from './ArraySorterFunc.js';
 import Banner from './Banner.js';
 
 let algorithms = ['BubbleSort', 'QuickSort', 'MergeSort'];
@@ -25,10 +26,8 @@ class App extends React.Component {
   render() {
     return  <div className="App">
 		<Banner algorithms = {algorithms} setAlgorithm = {this.setAlgorithm}> </Banner>
-		
-		{/* // ArraySorter should be a functional component that is regenerated every time the App's state changes
-		// In ArraySorter, we can use an effect or update to slowly show different array visualizations */}
-		<ArraySorter algorithm={this.state.currentAlgorithm} A={console.log("A")}>  </ArraySorter> 
+				
+		<ArraySorterFunc algorithm={this.state.currentAlgorithm} A={console.log("A")}>  </ArraySorterFunc> 
 	</div>
 ;
   }
