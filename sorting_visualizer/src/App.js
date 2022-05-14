@@ -7,7 +7,7 @@ import ArraySorter from './ArraySorter.js';
 import ArraySorterFunc from './ArraySorterFunc.js';
 import Banner from './Banner.js';
 
-let algorithms = ['BubbleSort', 'QuickSort', 'MergeSort'];
+let algorithms = ["BubbleSort", "QuickSort", "MergeSort"];
 
 class App extends React.Component {
   constructor() {

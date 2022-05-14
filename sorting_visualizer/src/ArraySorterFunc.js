@@ -2,12 +2,11 @@ import logo from './logo.svg';
 import ArrayVisualization from './ArrayVisualization.js';
 import React, { useState, useEffect } from 'react';
 import NormalDistribution from 'normal-distribution';
-import {bubbleSort, mergeSort} from './SortingAlgorithms.js';
+import {bubbleSort, mergeSort, quickSort} from './SortingAlgorithms.js';
 import ArraySeriesVisualization from './ArraySeriesVisualization.js';
 
 function ArraySorterFunc(props) { 
 
-  console.log("ArraySortFunc ran");
   let sortingHistory = [];
   
   let create_normally_distributed_array = function(n, mean, std_dev) {
@@ -34,8 +33,11 @@ function ArraySorterFunc(props) {
   sortingHistory.push([...startingArray]); 
 
   let sortingFunction = bubbleSort;
-  if (props.algorithmName === "MergeSort") {
+  if (props.algorithm == "MergeSort") {
         sortingFunction = mergeSort;
+  }
+  else if (props.algorithm == "QuickSort") {
+	sortingFunction = quickSort;
   }
 
   sortingFunction(startingArray, recordSortingSnapshot);

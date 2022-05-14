@@ -19,13 +19,11 @@ function bubbleSortImplementation(array, leftIndex, rightIndex, recordProgressFu
 };
 
 function bubbleSort(array, recordProgressFunc) {
-	console.log("Bubble sort ran");
 	return bubbleSortImplementation(array, 0, array.length - 1, recordProgressFunc);
 }
 
 
 function merge(left, right) {
-	
 	
 	let leftHasItems = true;
 	let rightHasItems = true;
@@ -86,4 +84,45 @@ function mergeSort(array, recordProgressFunc) {
         return mergeSortImplementation(array, array, 0, recordProgressFunc);
 }
 
-export { bubbleSort, mergeSort };
+function quickSortImplementation(array, originalArray, leftIndex, recordProgressFunc) {
+
+        let span = array.length;
+        console.log(span);
+	if (span <= 1) {
+                return array;
+        }
+
+	let randomIndex = Math.floor(Math.random() * array.length);
+	let partition_value = array[randomIndex];
+        let left = [];
+        let right = [];
+	
+	for (let i = 0; i < array.length; i++) {
+		if (array[i] >= partition_value) {
+			right.push(array[i]);
+		}
+		else {
+			left.push(array[i]);
+		}
+	}
+
+
+        left = quickSortImplementation(left, originalArray, leftIndex, recordProgressFunc);
+        right = quickSortImplementation(right, originalArray, leftIndex + left.length, recordProgressFunc);
+	
+	let sortedArray = left.concat(right);
+        for (let i = 0; i < sortedArray.length; i++) {
+                originalArray[leftIndex + i] = sortedArray[i];
+        }
+	
+        recordProgressFunc(originalArray);
+        return sortedArray;
+}
+
+function quickSort(array, recordProgressFunc) {
+        console.log("quickSort ran");
+	return quickSortImplementation(array, array, 0, recordProgressFunc);
+}
+
+
+export { bubbleSort, mergeSort, quickSort };
