@@ -14,13 +14,11 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from  '@material-ui/icons/Adb.js';
 import SortIcon from '@material-ui/icons/Sort';
 
-const pages = [];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Banner = () => {
+const Banner = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -36,13 +34,19 @@ const Banner = () => {
     setAnchorElUser(null);
   };
 
+  const handleUserClick = (algoName) => {
+    handleCloseUserMenu();
+    props.setAlgorithm(algoName);
+  };
+
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">   
         <Toolbar disableGutters>
 
 	  <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Open Algorithm Selection">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
               	<SortIcon style={{ fill: 'white' }}> </SortIcon>
 	      </IconButton>
@@ -63,9 +67,9 @@ const Banner = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {props.algorithms.map((algo_name) => (
+                <MenuItem key={algo_name} onClick={() => {handleUserClick(algo_name)} }>
+                  <Typography textAlign="center">{algo_name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -118,26 +122,9 @@ const Banner = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
             </Menu>
           </Box>
           
-	  <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-
         </Toolbar>
       </Container>
     </AppBar>

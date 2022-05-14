@@ -1,6 +1,6 @@
 
 
-function bubbleSort(array, leftIndex, rightIndex, recordProgressFunc) {
+function bubbleSortImplementation(array, leftIndex, rightIndex, recordProgressFunc) {
 
         let span = rightIndex - leftIndex;
         if (span === 0) {
@@ -15,8 +15,12 @@ function bubbleSort(array, leftIndex, rightIndex, recordProgressFunc) {
         array[leftIndex] = minValue;
 
         recordProgressFunc(array);
-        return bubbleSort(array, leftIndex + 1, rightIndex, recordProgressFunc);
+        return bubbleSortImplementation(array, leftIndex + 1, rightIndex, recordProgressFunc);
 };
+
+function bubbleSort(array, recordProgressFunc) {
+	return bubbleSortImplementation(array, 0, array.length - 1, recordProgressFunc);
+}
 
 
 function merge(left, right) {
@@ -54,7 +58,7 @@ function merge(left, right) {
 	return mergedArray;
 }
 
-function mergeSort(array, originalArray, leftIndex, recordProgressFunc) {
+function mergeSortImplementation(array, originalArray, leftIndex, recordProgressFunc) {
 	
 	let span = array.length;
         if (span <= 1) {
@@ -65,18 +69,20 @@ function mergeSort(array, originalArray, leftIndex, recordProgressFunc) {
 	let left = array.slice(0, midIndex);
 	let right = array.slice(midIndex);
 	
-	left = mergeSort(left, originalArray, leftIndex, recordProgressFunc);
-	right = mergeSort(right, originalArray, leftIndex + span/2, recordProgressFunc);
-	
+	left = mergeSortImplementation(left, originalArray, leftIndex, recordProgressFunc);
+	right = mergeSortImplementation(right, originalArray, leftIndex + span/2, recordProgressFunc);
 	
 	let mergedArray = merge(left, right, recordProgressFunc);
-		
 	for (let i = 0; i < mergedArray.length; i++) {
 		originalArray[leftIndex + i] = mergedArray[i];  
 	}	
 	
 	recordProgressFunc(originalArray);
 	return mergedArray;
+}
+
+function mergeSort(array, recordProgressFunc) {
+        return mergeSortImplementation(array, array, 0, recordProgressFunc);
 }
 
 export { bubbleSort, mergeSort };

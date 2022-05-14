@@ -5,10 +5,10 @@ import NormalDistribution from 'normal-distribution';
 import {bubbleSort, mergeSort} from './SortingAlgorithms.js';
 
 class ArraySorter extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
-    this.state = {array: this.shuffleArray(this.create_normally_distributed_array(500, 50, 1))};
-    this.timeout = 250; // 2.5 seconds
+    this.state = {sortingHistory: this.shuffleArray(this.create_normally_distributed_array(500, 50, 1))};
+    this.timeout = 0.250; // 2.5 seconds
     this.updateTimeout = setTimeout(() => this.update(), this.timeout);
     this.sortingHistory = [];
     this.displayedIndex = 0;
@@ -16,14 +16,19 @@ class ArraySorter extends React.Component {
     this.recordSortingSnapshot = this.recordSortingSnapshot.bind(this);
     this.shuffleArray = this.shuffleArray.bind(this);
     this.getDisplayArray = this.getDisplayArray.bind(this);
+    this.render = this.render.bind(this);
+
+    this.sortingFunction = bubbleSort;
+    if (props.algorithmName === "MergeSort") {
+	this.sortingFunction = mergeSort;
+    }
     
-    //bubbleSort(this.state.array, 0, this.state.array.length, this.recordSortingSnapshot);
-    mergeSort(this.state.array, this.state.array, 0, this.recordSortingSnapshot);
+    this.sortingFunction(this.state.sortingHistory, this.recordSortingSnapshot); 
   }
 
   update = () => {
 	// Need to change the state so it calls render again
-	this.setState({array: []});
+	this.setState({displayedIndex: this.state.displayedIndex + 1});
 	this.displayedIndex += 1;
 	setTimeout(() => this.update(), this.timeout)	
   };
