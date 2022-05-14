@@ -48,7 +48,7 @@ const Banner = (props) => {
 	  <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open Algorithm Selection">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              	<SortIcon style={{ fill: 'white' }}> </SortIcon>
+              	<SortIcon style={{ fill: 'white', fontSize: 45}}> </SortIcon>
 	      </IconButton>
             </Tooltip>
             <Menu
