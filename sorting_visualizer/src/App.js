@@ -16,11 +16,14 @@ class App extends React.Component {
     this.setAlgorithm = this.setAlgorithm.bind(this);
     this.render = this.render.bind(this);
   }
+  
+  componentDidMount(){
+    document.title = "Sorting Algorithms";
+  }
 
   setAlgorithm(algorithmName) {
 	 console.log(algorithmName);
 	 this.setState({currentAlgorithm: algorithmName});	
-  	 //this.forceUpdate(this.render);
   }
 
   render() {
