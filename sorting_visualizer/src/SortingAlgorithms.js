@@ -19,6 +19,7 @@ function bubbleSortImplementation(array, leftIndex, rightIndex, recordProgressFu
 };
 
 function bubbleSort(array, recordProgressFunc) {
+	console.log("Bubble sort ran");
 	return bubbleSortImplementation(array, 0, array.length - 1, recordProgressFunc);
 }
 
